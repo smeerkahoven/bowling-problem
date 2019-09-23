@@ -17,7 +17,7 @@ public class BowlingScoreApp {
         parser = new BowlingScoreParserFile(file);
     }
 
-    public void start() {
+    public void start() throws BowlingException {
         BowlingToken token;
 
         while ((token = parser.getNextItem()) != null) {

@@ -1,5 +1,6 @@
 package com.bowling.controller;
 
+import com.bowling.model.BowlingException;
 import com.bowling.model.BowlingPlayer;
 import com.bowling.model.BowlingScoreLane;
 import com.bowling.model.BowlingToken;
@@ -13,7 +14,7 @@ public interface BowlingScoreGame {
      * Process Each throw
      * @param token
      */
-    public void processThrow (BowlingToken token) ;
+    public void processThrow (BowlingToken token) throws BowlingException;
 
 
     /**

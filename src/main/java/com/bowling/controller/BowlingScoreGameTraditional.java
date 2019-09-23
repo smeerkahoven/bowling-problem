@@ -24,7 +24,7 @@ public class BowlingScoreGameTraditional implements BowlingScoreGame {
      * @param token
      */
     @Override
-    public void processThrow(BowlingToken token) {
+    public void processThrow(BowlingToken token) throws BowlingException {
 
         BowlingScoreLane currentLane ;
         if (scoreSheet.isEmpty()){
@@ -48,20 +48,15 @@ public class BowlingScoreGameTraditional implements BowlingScoreGame {
      * @param token
      * @param lane
      */
-    private void assign(BowlingToken token, BowlingScoreLane lane) {
+    private void assign(BowlingToken token, BowlingScoreLane lane)
+            throws BowlingException {
 
         BowlingScoreFrame currentFrame = lane.getCurrentScoreFrame() ;
 
          if (currentFrame.getBallOne() == BowlingScoreFrame.INITIAL) {
             currentFrame.setBallOne(token.getValue());
         }else if (currentFrame.getBallTwo() == BowlingScoreFrame.INITIAL) {
-            if (currentFrame.getBallOne() + token.getValue() <= SPARE) {
-                currentFrame.setBallTwo(token.getValue());
-            }else {
-                //incorrect I assigned 0
-                // TODO throw exception VALUE IS MORE THAN 10
-                currentFrame.setBallTwo(BowlingScoreFrame.EMPTY);
-            }
+            currentFrame.setBallTwo(token.getValue());
         } else if (currentFrame instanceof BowlingScoreFrameLast) {
              if (((BowlingScoreFrameLast) currentFrame).getBallThree() == BowlingScoreFrame.INITIAL) {
                 ((BowlingScoreFrameLast) currentFrame).setBallThree(token.getValue());

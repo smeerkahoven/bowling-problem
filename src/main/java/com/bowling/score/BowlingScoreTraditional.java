@@ -1,6 +1,7 @@
 package com.bowling.score;
 
 import com.bowling.controller.BowlingScoreGame;
+import com.bowling.model.BowlingException;
 import com.bowling.model.BowlingScoreFrame;
 import com.bowling.model.BowlingScoreFrameLast;
 import com.bowling.model.BowlingScoreLane;
@@ -8,7 +9,7 @@ import com.bowling.model.BowlingScoreLane;
 public class BowlingScoreTraditional implements BowlingScoreAlgorithm{
 
     @Override
-    public BowlingScoreLane score(BowlingScoreLane lane) {
+    public BowlingScoreLane score(BowlingScoreLane lane) throws BowlingException {
 
         BowlingScoreFrame currentFrame = lane.getCurrentScoreFrame() ;
 
@@ -31,9 +32,9 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm{
                         lane = this.applyStrikeScoring(lane, 1) ;
                         if (lane.getCurrentFrame() < BowlingScoreLane.MAX_LANE) {
                             lane.goToNextFrame();
-                        }else {
-                            //TODO throw Exception Cause Maximun Frame achieved.
                         }
+                    } else {
+
                     }
                     ((BowlingScoreFrameLast)currentFrame).setCurrentBall(3);
                 }
@@ -42,18 +43,21 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm{
                 if (currentFrame instanceof BowlingScoreFrameLast){
                     if (((BowlingScoreFrameLast) currentFrame).getBallThree() == BowlingScoreGame.STRIKE) {
                         lane = this.applyStrikeScoring(lane, 0) ;
-                        if (lane.getCurrentFrame() < BowlingScoreLane.MAX_LANE) {
-                            lane.goToNextFrame();
-                        }else {
-                            //TODO throw Exception Cause Maximun Frame achieved.
-                        }
+                        lane.goToNextFrame();
                     }
                 }
+
                 break;
         }
         return lane ;
     }
 
+    /**
+     *
+     * @param lane
+     * @param decrementor
+     * @return
+     */
     private BowlingScoreLane applyStrikeScoring(BowlingScoreLane lane , int decrementor){
         lane.strike();
         if (lane.getStrikeCounter() == 3){
@@ -65,6 +69,12 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm{
         return lane ;
     }
 
+    /**
+     *
+     * @param lane
+     * @param fromPosition
+     * @param toPosition
+     */
     private void assignScoreToFrame( BowlingScoreLane lane, int fromPosition, int toPosition) {
         int score = 0 ;
         int ballOne = 0 ;
@@ -83,13 +93,19 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm{
                 score += ballOne ;
             }
 
+
             if (scoreFrame instanceof BowlingScoreFrameLast) {
+
                 int ballThree =( (BowlingScoreFrameLast)scoreFrame).getBallThree() ;
 
+                if (ballThree != BowlingScoreFrame.INITIAL)
                 score += ballThree ;
             }
         }
 
-        toFrame.setScore(score);
+        toFrame.setScore(score + lane.getTotal());
+
+        lane.setTotal(toFrame.getScore());
+
     }
 }
