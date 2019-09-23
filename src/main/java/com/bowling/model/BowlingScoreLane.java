@@ -3,40 +3,83 @@ package com.bowling.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Represents the Lane of the Bowling Game
  */
-public class BowlingScoreLane {
+@Getter
+@Setter
+public class BowlingScoreLane  {
+
+    public static final int MAX_LANE = 10 ;
 
     private BowlingPlayer player ;
-    private List<BowlingFrame> frames ;
+    private HashMap<Integer, BowlingScoreFrame> frames ;
+    private Integer currentFrame =1 ;
     private int total ;
+    private int strikeCounter = 0 ;
 
-    public BowlingScoreLane(BowlingPlayer player) {
-        this.player = player ;
+    public BowlingScoreLane() {
         initiate();
+    }
+
+    public void strike() {
+        if (strikeCounter <=3 ){
+            strikeCounter++ ;
+        }
     }
 
     /**
      *  Initiate to 10 the current Score Lane
      */
     private void initiate() {
-        frames = new ArrayList<>();
-
+        frames = new HashMap<>(10);
         for(int i =1 ;i<=10 ; i++){
             if (i == 10) {
-                frames.add(new BowlingFrameLast(i));
+                frames.put(i, new BowlingScoreFrameLast(i));
             }else {
-                frames.add(new BowlingFrameNormal(i));
+                frames.put(i, new BowlingScoreFrameNormal(i));
             }
         }
+    }
+
+    public BowlingScoreFrame getCurrentScoreFrame() {
+        return frames.get(this.currentFrame);
     }
 
     public int getTotal (){
         return this.total ;
     }
 
+    public void goToNextFrame() {
+        if (currentFrame <= MAX_LANE) {
+            currentFrame++ ;
+        }
+    }
+    public void addScoreToFrame(int score){
+        BowlingScoreFrame currentFrame = frames.get(this.currentFrame);
+
+    }
+
+    public BowlingScoreFrame getFrame(int position) {
+        return this.frames.get(position) ;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof BowlingScoreLane) {
+            BowlingScoreLane laneCompareTo = (BowlingScoreLane)obj ;
+            if (this.player!= null && laneCompareTo.getPlayer() != null) {
+                return (this.player.getName().equalsIgnoreCase(laneCompareTo.getPlayer().getName()));
+            }
+        }else if (obj != null && obj instanceof String) {
+            String player = (String) obj ;
+            if (this.player!= null){
+                return this.player.getName().equalsIgnoreCase(player);
+            }
+        }
+
+        return false;
+    }
 }
