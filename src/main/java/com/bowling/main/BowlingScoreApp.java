@@ -25,20 +25,19 @@ public class BowlingScoreApp {
     public void start() throws BowlingException {
         BowlingToken token;
         boolean allIsOK = true ;
-        while ((token = parser.getNextItem()) != null) {
-            System.out.println(String.format("key: %s, value: %d", token.getKey(), token.getValue()));
-
+        while ((token = parser.getNextItem()) != null && allIsOK) {
             if (this.parser.isValid(token)) {
                 game.processThrow(token);
             }else {
                 //invalid Token
                 allIsOK = false ;
             }
-
         }
 
         if (allIsOK) {
             printer.print(((BowlingScoreGameTraditional)game).getScoreSheet());
+        }else {
+            throw new BowlingException("There are errors parsing file. You must send valid name and score ");
         }
     }
 

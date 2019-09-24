@@ -1,5 +1,6 @@
 package com.bowling.controller;
 
+import com.bowling.BowlingUtils;
 import com.bowling.exception.BowlingException;
 import com.bowling.model.BowlingToken;
 
@@ -8,12 +9,6 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class BowlingScoreParserFile {
-
-
-    private static final Integer INVALID = -1 ;
-    private static final String FAIL = "F" ;
-    private static final String [] ALLOWED_VALUES= new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ,"10", FAIL};
-    private static final Set<String> ALLOWED_SET = new HashSet<>(Arrays.asList(ALLOWED_VALUES));
 
     private static final String SPACE = " " ;
 
@@ -67,7 +62,7 @@ public class BowlingScoreParserFile {
     }
 
     public boolean isValid(BowlingToken token) {
-        return token != null && token.getKey() != null && token.getValue()!= INVALID ;
+        return token != null && token.getKey() != null && token.getValue()!= BowlingUtils.INVALID ;
     }
 
     /**
@@ -80,15 +75,15 @@ public class BowlingScoreParserFile {
      */
     private Integer convertValueToValidPin(String value){
 
-        if (value.equals(FAIL)) {
+        if (value.equals(BowlingUtils.FAIL)) {
             return 0 ;
         }
 
-        if (ALLOWED_SET.contains(value)){
+        if (BowlingUtils.ALLOWED_SET.contains(value)){
             return Integer.parseInt(value);
         }
 
-        return INVALID ;
+        return BowlingUtils.INVALID ;
     }
 
 }

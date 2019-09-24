@@ -25,6 +25,10 @@ public abstract class BowlingScoreFrame {
         return this ;
     }
 
+    public  boolean areThrowsCorrect (){
+        return (ballOne + ballTwo <= BowlingUtils.SPARE) ;
+    }
+
     public boolean isSpare () {
         if (currentBall == 2){
             if (ballOne != BowlingUtils.INITIAL && ballTwo != BowlingUtils.INITIAL){

@@ -34,6 +34,24 @@ public class BowlingScoreFrameLast extends BowlingScoreFrame {
         return false ;
     }
 
+    @Override
+    public boolean areThrowsCorrect() {
+        if (currentBall == 2){
+            if (ballOne == BowlingUtils.STRIKE){
+                return  true ;
+            } else if ( ballOne+ ballTwo <= BowlingUtils.SPARE) {
+                return true ;
+            }
+        }else if (currentBall == 3) {
+            if (ballTwo == BowlingUtils.STRIKE){
+                return true ;
+            }else if (ballTwo + ballThree<= BowlingUtils.SPARE) {
+                return true ;
+            }
+        }
+        return false ;
+    }
+
     public String toString(){
         String output ="" ;
             if (ballOne == BowlingUtils.STRIKE) {

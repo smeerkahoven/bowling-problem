@@ -15,4 +15,9 @@ public class BowlingPlayer implements Comparable<String> {
     public int compareTo(String name) {
         return this.name.equalsIgnoreCase(name) ? 1 : 0;
     }
+
+    @Override
+    public String toString() {
+        return name ;
+    }
 }

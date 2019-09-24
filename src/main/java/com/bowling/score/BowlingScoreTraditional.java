@@ -38,7 +38,6 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm {
                         lane.decrementSpare();
                     }
                 }
-
                 currentFrame.setCurrentBall(2);
                 break;
             case 2:
@@ -48,6 +47,12 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm {
                         lane = this.applyStrikeScoring(lane, 1);
 
                     } else {
+                        if (!currentFrame.areThrowsCorrect()) {
+                            throw new BowlingException(String
+                                    .format("Your values are incorrect for player:%s, ball one: %d, ball two: %d", lane.getPlayer(),
+                                            currentFrame.getBallOne(), currentFrame.getBallTwo()));
+                        }
+
                         if (currentFrame.isSpare()) {
                             assignScoreToFrame(lane, lane.getCurrentFrame(),
                                     lane.getCurrentFrame() - 1);
@@ -58,7 +63,11 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm {
                     }
                     ((BowlingScoreFrameLast) currentFrame).setCurrentBall(3);
                 } else {
-                    int decrementor = 0;
+                    if (!currentFrame.areThrowsCorrect()) {
+                        throw new BowlingException(String
+                                .format("Your values are incorrect for player:%s, ball one: %d, ball two: %d", lane.getPlayer(),
+                                currentFrame.getBallOne(), currentFrame.getBallTwo()));
+                    }
 
                     if (currentFrame.isSpare()) {
                         checkIfStrikeOnBallTwo(lane);
@@ -76,12 +85,24 @@ public class BowlingScoreTraditional implements BowlingScoreAlgorithm {
 
                 break;
             case 3:
+                if (!currentFrame.areThrowsCorrect()) {
+                    throw new BowlingException(String
+                            .format("Your values are incorrect for player:%s, " +
+                                            "ball one: %d, ball two: %d, ball three: %d"
+                                    , lane.getPlayer()
+                                    , currentFrame.getBallOne()
+                                    , currentFrame.getBallTwo()
+                                    , ((BowlingScoreFrameLast)currentFrame).getBallThree()
+                            ));
+                }
                 assignScoreToFrame(lane, lane.getCurrentFrame(),
                         lane.getCurrentFrame() - 0);
+                lane.goToNextFrame();
                 break;
         }
         return lane;
     }
+
 
     /**
      * Checks if there is an strike
