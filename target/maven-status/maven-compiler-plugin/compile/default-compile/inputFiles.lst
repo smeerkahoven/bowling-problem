@@ -3,6 +3,9 @@
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/model/BowlingToken.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/score/BowlingScoreAlgorithm.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/model/BowlingPlayer.java
+/home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/view/BowlingGameSheetPrinter.java
+/home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/view/BowlingGamePrinter.java
+/home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/BowlingUtils.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/controller/BowlingScoreGame.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/controller/BowlingScoreGameTraditional.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/model/BowlingScoreSheet.java
@@ -10,6 +13,6 @@
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/main/BowlingScoreApp.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/model/BowlingScoreFrameNormal.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/model/BowlingScoreFrame.java
-/home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/model/BowlingException.java
+/home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/exception/BowlingException.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/BowlingScoreSpringApplication.java
 /home/xeio/IdeaProjects/bowling-problem/src/main/java/com/bowling/controller/BowlingScoreParserFile.java

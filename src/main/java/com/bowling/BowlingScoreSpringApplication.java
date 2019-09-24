@@ -1,7 +1,7 @@
 package com.bowling;
 
 import com.bowling.main.BowlingScoreApp;
-import com.bowling.model.BowlingException;
+import com.bowling.exception.BowlingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

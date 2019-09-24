@@ -1,5 +1,6 @@
 package com.bowling.model;
 
+import com.bowling.exception.BowlingException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,14 +20,33 @@ public class BowlingScoreLane  {
     private int currentFrame =1 ;
     private int total = 0  ;
     private int strikeCounter = 0 ;
+    private int spareCounter = 0 ;
 
     public BowlingScoreLane() {
         initiate();
     }
 
-    public void strike() {
+    public void incrementStrike() {
         if (strikeCounter <=3 ){
             strikeCounter++ ;
+        }
+    }
+
+    public void incrementSpare() {
+        if (spareCounter <=1 ){
+            spareCounter++ ;
+        }
+    }
+
+    public void decrementStrikes() {
+        if (strikeCounter > 0) {
+            strikeCounter-- ;
+        }
+    }
+
+    public void decrementSpare() {
+        if (spareCounter > 0) {
+            spareCounter-- ;
         }
     }
 
@@ -37,9 +57,9 @@ public class BowlingScoreLane  {
         frames = new HashMap<>(10);
         for(int i =1 ;i<=10 ; i++){
             if (i == 10) {
-                frames.put(i, new BowlingScoreFrameLast(i));
+                frames.put(i, new BowlingScoreFrameLast().withPosition(i));
             }else {
-                frames.put(i, new BowlingScoreFrameNormal(i));
+                frames.put(i, new BowlingScoreFrameNormal().withPosition(i));
             }
         }
     }
@@ -56,11 +76,7 @@ public class BowlingScoreLane  {
     }
 
     public void goToNextFrame() {
-            currentFrame++ ;
-    }
-    public void addScoreToFrame(int score){
-        BowlingScoreFrame currentFrame = frames.get(this.currentFrame);
-
+        currentFrame++ ;
     }
 
     public BowlingScoreFrame getFrame(int position) {
@@ -83,4 +99,5 @@ public class BowlingScoreLane  {
 
         return false;
     }
+
 }

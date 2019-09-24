@@ -1,8 +1,11 @@
 package com.bowling.controller;
 
+import com.bowling.BowlingUtils;
+import com.bowling.exception.BowlingException;
 import com.bowling.model.*;
 import com.bowling.score.BowlingScoreAlgorithm;
 import com.bowling.score.BowlingScoreTraditional;
+import lombok.Getter;
 
 import java.util.Optional;
 
@@ -10,6 +13,7 @@ import java.util.Optional;
  * Class for BowlinScore Game For Traditional Methods
  * According to Rules
  */
+@Getter
 public class BowlingScoreGameTraditional implements BowlingScoreGame {
 
     private BowlingScoreSheet scoreSheet = new BowlingScoreSheet();
@@ -53,12 +57,12 @@ public class BowlingScoreGameTraditional implements BowlingScoreGame {
 
         BowlingScoreFrame currentFrame = lane.getCurrentScoreFrame() ;
 
-         if (currentFrame.getBallOne() == BowlingScoreFrame.INITIAL) {
+         if (currentFrame.getBallOne() == BowlingUtils.INITIAL) {
             currentFrame.setBallOne(token.getValue());
-        }else if (currentFrame.getBallTwo() == BowlingScoreFrame.INITIAL) {
+        }else if (currentFrame.getBallTwo() == BowlingUtils.INITIAL) {
             currentFrame.setBallTwo(token.getValue());
         } else if (currentFrame instanceof BowlingScoreFrameLast) {
-             if (((BowlingScoreFrameLast) currentFrame).getBallThree() == BowlingScoreFrame.INITIAL) {
+             if (((BowlingScoreFrameLast) currentFrame).getBallThree() == BowlingUtils.INITIAL) {
                 ((BowlingScoreFrameLast) currentFrame).setBallThree(token.getValue());
              }
          }

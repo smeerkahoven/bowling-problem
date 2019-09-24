@@ -1,6 +1,6 @@
 package com.bowling.score;
 
-import com.bowling.model.BowlingException;
+import com.bowling.exception.BowlingException;
 import com.bowling.model.BowlingScoreLane;
 
 public interface BowlingScoreAlgorithm {

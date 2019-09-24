@@ -1,3 +1,6 @@
 BowlingConfiguration.class
-com/bowling/model/BowlinPlayerTest.class
+main/BowlingScoreAppTest.class
+com/bowling/model/BowlingScoreFrameTest.class
 com/bowling/model/BowlingScoreSheetTest.class
+com/bowling/model/BowlinPlayerTest.class
+view/BowlingGameSheetPrinterTest.class

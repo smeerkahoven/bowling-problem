@@ -1,6 +1,6 @@
 package com.bowling.controller;
 
-import com.bowling.model.BowlingException;
+import com.bowling.exception.BowlingException;
 import com.bowling.model.BowlingToken;
 
 import java.io.File;
