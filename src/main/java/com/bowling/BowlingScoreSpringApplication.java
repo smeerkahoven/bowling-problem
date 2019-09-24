@@ -34,8 +34,8 @@ public class BowlingScoreSpringApplication implements CommandLineRunner {
         }
 
         try {
-            BowlingScoreApp app = new BowlingScoreApp(args[0]);
-            app.start();
+            BowlingScoreApp app = new BowlingScoreApp();
+            app.init(args[0]);
         } catch (BowlingException e) {
             System.err.println(e.getMessage());
         }

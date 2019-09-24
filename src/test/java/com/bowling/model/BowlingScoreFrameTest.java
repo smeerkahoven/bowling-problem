@@ -12,6 +12,56 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest(classes = {BowlingScoreFrameNormal.class, BowlingScoreFrameLast.class})
 public class BowlingScoreFrameTest {
 
+
+    @Test
+    public void areThrowCorrectTest() {
+        BowlingScoreFrameNormal frame = new BowlingScoreFrameNormal();
+        frame.setPosition(1);
+        frame.setBallOne(5);
+        frame.setBallTwo(3);
+
+        assertTrue(frame.areThrowsCorrect());
+    }
+
+    @Test
+    public void areThrowCorrectLastTest() {
+        BowlingScoreFrameLast frame = new BowlingScoreFrameLast();
+        frame.setPosition(1);
+        frame.setCurrentBall(3);
+        frame.setBallOne(5);
+        frame.setBallTwo(3);
+        frame.setBallThree(7);
+
+        assertTrue(frame.areThrowsCorrect());
+    }
+
+
+    @Test
+    public void isSpareTest() {
+
+        BowlingScoreFrameNormal frame = new BowlingScoreFrameNormal();
+        frame.setPosition(1);
+        frame.setCurrentBall(2);
+        frame.setBallOne(5);
+        frame.setBallTwo(5);
+
+        assertTrue(frame.isSpare());
+    }
+
+    @Test
+    public void isSpareLastTest() {
+
+        BowlingScoreFrameLast frame = new BowlingScoreFrameLast();
+        frame.setPosition(10);
+        frame.setCurrentBall(3);
+        frame.setBallOne(5);
+        frame.setBallTwo(7);
+        frame.setBallThree(3);
+
+        assertTrue(frame.isSpare());
+    }
+
+
     @Test
     public void testToStringNotSpareNeitherStrike(){
         BowlingScoreFrameNormal frame = new BowlingScoreFrameNormal();
@@ -19,7 +69,7 @@ public class BowlingScoreFrameTest {
         frame.setBallOne(5);
         frame.setBallTwo(3);
 
-        assertTrue("5\t\t3".equalsIgnoreCase(frame.toString()));
+        assertTrue("5\t3".equalsIgnoreCase(frame.toString()));
     }
 
     @Test
@@ -29,7 +79,7 @@ public class BowlingScoreFrameTest {
         frame.setBallOne(10);
         frame.setBallTwo(3);
 
-        assertTrue("X".equalsIgnoreCase(frame.toString()));
+        assertTrue("X\t".equalsIgnoreCase(frame.toString()));
     }
 
     @Test
@@ -39,7 +89,7 @@ public class BowlingScoreFrameTest {
         frame.setBallOne(7);
         frame.setBallTwo(3);
 
-        assertTrue("7\t\t/".equalsIgnoreCase(frame.toString()));
+        assertTrue("7\t/".equalsIgnoreCase(frame.toString()));
     }
 }
 

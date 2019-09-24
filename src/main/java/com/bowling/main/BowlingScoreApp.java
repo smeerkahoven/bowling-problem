@@ -7,7 +7,9 @@ import com.bowling.controller.BowlingScoreParserFile;
 import com.bowling.model.BowlingToken;
 import com.bowling.view.BowlingGamePrinter;
 import com.bowling.view.BowlingGameSheetPrinter;
+import lombok.Getter;
 
+@Getter
 public class BowlingScoreApp {
 
     private BowlingScoreGame game;
@@ -16,10 +18,18 @@ public class BowlingScoreApp {
 
     private BowlingGamePrinter printer  ;
 
-    public BowlingScoreApp(String file) throws BowlingException {
+    private String file ;
+
+    public void init(String file) throws BowlingException {
         game = new BowlingScoreGameTraditional();
         parser = new BowlingScoreParserFile(file);
         printer = new BowlingGameSheetPrinter();
+
+        this.start();
+    }
+
+    public BowlingScoreApp()  {
+
     }
 
     public void start() throws BowlingException {

@@ -6,6 +6,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
+/**
+ * Bowling Player
+ */
 public class BowlingPlayer implements Comparable<String> {
     private String name ;
 
